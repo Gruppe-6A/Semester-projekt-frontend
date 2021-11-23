@@ -36,9 +36,26 @@ function apiFacade() {
       });
   };
 
-  const fetchLoggedIn = () => {
+  const getUserRoles = () => {
+    const token = getToken();
+    if (token != null) {
+      const payloadBase64 = getToken().split(".")[1];
+      const decodedClaims = JSON.parse(window.atob(payloadBase64));
+      const roles = decodedClaims.roles;
+      return roles;
+    } else return "";
+  };
+
+  const hasUserAccess = (neededRole, loggedIn) => {
+    const roles = getUserRoles().split(",");
+    return loggedIn && roles.includes(neededRole);
+  };
+
+  const fetchLoggedIn = (endpoint, updateAction) => {
     const options = makeOptions("GET", true);
-    return fetch(URL + "/api/info/", options).then(handleHttpErrors);
+    return fetch(URL + "/api/info/" + endpoint, options)
+      .then(handleHttpErrors)
+      .then((data) => updateAction(data));
   };
 
   const fetchData = (endpoint, updateAction) => {
@@ -73,6 +90,8 @@ function apiFacade() {
     logout,
     fetchData,
     fetchLoggedIn,
+    getUserRoles,
+    hasUserAccess,
   };
 }
 const facade = apiFacade();

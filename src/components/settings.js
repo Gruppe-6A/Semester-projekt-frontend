@@ -1,1 +1,1 @@
-export const URL = "http://localhost:8080/cool";
+export const URL = "https://densorteudvikler.dk/tomcat/devops-starter";
