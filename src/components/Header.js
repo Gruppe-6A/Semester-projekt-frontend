@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, NavLink } from "react-router-dom";
 
-function Header({ facade, loggedIn }) {
+function Header({ facade, loggedIn, dataFromServer, logout }) {
   return (
     <div className="header">
       <li>
@@ -11,25 +11,58 @@ function Header({ facade, loggedIn }) {
       {facade.hasUserAccess("user", loggedIn) && (
         <li>
           <NavLink exact activeClassName="selected" to="/ex1">
-            Crypto
+            Portfolio
           </NavLink>
         </li>
       )}
-      <li>
-        <NavLink exact activeClassName="selected" to="/ex2">
-          Jokes
-        </NavLink>
-      </li>
-      <li>
-        <NavLink exact activeClassName="selected" to="/ex3">
-          Exercise 3
-        </NavLink>
-      </li>
-      <li style={{ float: "right" }}>
-        <NavLink exact activeClassName="selected" to="/login">
-          Login
-        </NavLink>
-      </li>
+      {facade.hasUserAccess("user", loggedIn) && (
+        <li>
+          <NavLink exact activeClassName="selected" to="/ex2">
+            Favorites
+          </NavLink>
+        </li>
+      )}
+      {facade.hasUserAccess("admin", loggedIn) && (
+        <li>
+          <NavLink exact activeClassName="selected" to="/ex3">
+            Only for admin
+          </NavLink>
+        </li>
+      )}
+      {!(
+        facade.hasUserAccess("admin", loggedIn) ||
+        facade.hasUserAccess("user", loggedIn)
+      ) && (
+        <li style={{ float: "right" }}>
+          <NavLink exact activeClassName="selected" to="/signup">
+            Sign up
+          </NavLink>
+        </li>
+      )}
+      {!(
+        facade.hasUserAccess("admin", loggedIn) ||
+        facade.hasUserAccess("user", loggedIn)
+      ) && (
+        <li style={{ float: "right" }}>
+          <NavLink exact activeClassName="selected" to="/login">
+            Login
+          </NavLink>
+        </li>
+      )}
+      {(facade.hasUserAccess("user", loggedIn) ||
+        facade.hasUserAccess("admin", loggedIn)) && (
+        <li style={{ float: "right" }}>
+          <NavLink exact activeClassName="selected" to="/">
+            <button
+              type="button"
+              className="btn-sm btn-danger"
+              onClick={logout}
+            >
+              Logout
+            </button>
+          </NavLink>
+        </li>
+      )}
       <li
         style={{
           float: "right",

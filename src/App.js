@@ -12,6 +12,7 @@ import Exercise1 from "./components/Exercise1";
 import Exercise2 from "./components/Exercise2";
 import Exercise3 from "./components/Exercise3";
 import LoginPage from "./components/LoginPage";
+import LogoutBtn from "./components/LogoutBtn";
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -36,7 +37,7 @@ export default function App({ facade }) {
     <Router>
       <div>
         <ul className="header">
-          <Header facade={facade} loggedIn={loggedIn} />
+          <Header facade={facade} loggedIn={loggedIn} logout={logout} />
         </ul>
         <div className="content">
           <Switch>
@@ -44,9 +45,7 @@ export default function App({ facade }) {
               <Home />
             </Route>
             <Route path="/ex1">
-              {facade.hasUserAccess("user", loggedIn) && (
-                <Exercise1 facade={facade} />
-              )}
+              <Exercise1 facade={facade} />
             </Route>
             <Route path="/ex2">
               <Exercise2 facade={facade} />
@@ -63,6 +62,7 @@ export default function App({ facade }) {
                 facade={facade}
               />
             </Route>
+            <Route path="/signup"></Route>
           </Switch>
         </div>
       </div>

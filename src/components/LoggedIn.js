@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 export default function LoggedIn({ facade }) {
   const [dataFromServer, setDataFromServer] = useState("Loading...");
   const [errorMsg, setErrorMsg] = useState("All is good");

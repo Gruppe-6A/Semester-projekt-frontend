@@ -11,7 +11,7 @@ export default function LoginPage({
   login,
 }) {
   return (
-    <div className="position-absolute top-10 start-50 translate-middle-x pt-3">
+    <div className="container">
       <div>
         {!loggedIn ? (
           <LogIn login={login} setLoggedIn={setLoggedIn} />

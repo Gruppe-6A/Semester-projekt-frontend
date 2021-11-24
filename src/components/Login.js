@@ -16,29 +16,41 @@ export default function LogIn({ login, setLoggedIn }) {
   };
 
   return (
-    <div className="position-absolute top-10 start-50 translate-middle-x pt-3">
-      <h2>Login</h2>
-      <form onChange={onChange}>
-        <input
-          type="text"
-          className="form-control mb-2"
-          placeholder="Username"
-          id="username"
-        />
-        <input
-          type="password"
-          className="form-control mb-2"
-          placeholder="Password"
-          id="password"
-        />
-        <button
-          type="button"
-          className="btn btn-primary mb-2"
-          onClick={performLogin}
-        >
-          Login
-        </button>
-      </form>
+    <div className="container-md">
+      <div className="row">
+        <div className="col-sm-4" />
+        <div className="col-sm-4">
+          <h2>Login</h2>
+          <form onChange={onChange}>
+            <div>
+              <input
+                type="text"
+                className="form-control col-md-auto mb-2"
+                placeholder="Username"
+                id="username"
+              />
+              <div>
+                <input
+                  type="password"
+                  className="form-control col-md-auto mb-2"
+                  placeholder="Password"
+                  id="password"
+                />
+              </div>
+              <div>
+                <button
+                  type="button"
+                  className="btn btn-primary mb-2"
+                  onClick={performLogin}
+                >
+                  Login
+                </button>
+              </div>
+            </div>
+          </form>
+          <div className="col-sm-4" />
+        </div>
+      </div>
     </div>
   );
 }
