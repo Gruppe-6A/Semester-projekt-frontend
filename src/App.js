@@ -13,6 +13,7 @@ import Exercise2 from "./components/Exercise2";
 import Exercise3 from "./components/Exercise3";
 import LoginPage from "./components/LoginPage";
 import LogoutBtn from "./components/LogoutBtn";
+import Signup from "./components/Signup";
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -62,7 +63,9 @@ export default function App({ facade }) {
                 facade={facade}
               />
             </Route>
-            <Route path="/signup"></Route>
+            <Route path="/signup">
+              <Signup />
+            </Route>
           </Switch>
         </div>
       </div>
