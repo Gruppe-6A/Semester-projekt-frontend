@@ -36,6 +36,18 @@ function apiFacade() {
       });
   };
 
+  const signup = (user, password) => {
+    const options = makeOptions("POST", true, {
+      userName: user,
+      userPas: password,
+    });
+    return fetch(URL + "/api/info/", options)
+      .then(handleHttpErrors)
+      .then((res) => {
+        setToken(res.token);
+      });
+  };
+
   const getUserRoles = () => {
     const token = getToken();
     if (token != null) {
@@ -49,6 +61,11 @@ function apiFacade() {
   const hasUserAccess = (neededRole, loggedIn) => {
     const roles = getUserRoles().split(",");
     return loggedIn && roles.includes(neededRole);
+  };
+
+  const signupData = (body) => {
+    const options = makeOptions("POST", true, { body });
+    return fetch(URL + "/api/info/" + options).then(handleHttpErrors);
   };
 
   const fetchLoggedIn = (endpoint, updateAction) => {
@@ -92,6 +109,8 @@ function apiFacade() {
     fetchLoggedIn,
     getUserRoles,
     hasUserAccess,
+    signupData,
+    signup,
   };
 }
 const facade = apiFacade();
