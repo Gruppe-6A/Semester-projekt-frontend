@@ -39,7 +39,7 @@ function apiFacade() {
   const signup = (user, password) => {
     const options = makeOptions("POST", true, {
       userName: user,
-      userPas: password,
+      userPass: password,
     });
     return fetch(URL + "/api/info/", options)
       .then(handleHttpErrors)

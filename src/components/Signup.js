@@ -22,7 +22,7 @@ function Signup() {
         <div className="col-sm-4" />
         <div className="col-sm-4">
           <h2>Sign up</h2>
-          <form>
+          <form onChange={onChange}>
             <div>
               <input
                 type="text"
