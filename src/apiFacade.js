@@ -43,9 +43,6 @@ function apiFacade() {
     });
     return fetch(URL + "/api/info/", options)
       .then(handleHttpErrors)
-      .then((res) => {
-        setToken(res.token);
-      });
   };
 
   const getUserRoles = () => {

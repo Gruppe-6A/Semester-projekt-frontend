@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import facade from "../apiFacade";
 
-function Signup() {
+function Signup({signup, setSignedUp}) {
   const init = { username: "", password: "" };
   const [signupCredentials, setSignupCredentials] = useState(init);
 
   const performSignup = (evt) => {
     evt.preventDefault();
-    facade.signup(signupCredentials.username, signupCredentials.password);
+    signup(signupCredentials.username, signupCredentials.password, setSignedUp);
   };
   const onChange = (evt) => {
     setSignupCredentials({

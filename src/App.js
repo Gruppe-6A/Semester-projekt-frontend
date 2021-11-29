@@ -13,9 +13,11 @@ import Exercise2 from "./components/Exercise2";
 import Exercise3 from "./components/Exercise3";
 import LoginPage from "./components/LoginPage";
 import Signup from "./components/Signup";
+import SignupPage from "./components/SignupPage";
 
 export default function App({ facade }) {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [signedUp, setSignedUp] = useState(false);
 
   const logout = () => {
     facade.logout();
@@ -23,6 +25,9 @@ export default function App({ facade }) {
   };
   const login = (user, pass) => {
     facade.login(user, pass).then((res) => setLoggedIn(true));
+  };
+  const signup = (user, pass) => {
+    facade.signup(user, pass).then((res) => setSignedUp(true));
   };
   return (
     <Router>
@@ -54,7 +59,12 @@ export default function App({ facade }) {
               />
             </Route>
             <Route path="/signup">
-              <Signup />
+              <SignupPage
+                signup={signup}
+                signedUp={signedUp}
+                setSignedUp={setSignedUp}
+                facade={facade}
+              />
             </Route>
           </Switch>
         </div>
