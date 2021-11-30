@@ -65,6 +65,13 @@ function apiFacade() {
     return fetch(URL + "/api/info/" + options).then(handleHttpErrors);
   };
 
+  const postData = (id, link1, link2) => {
+    const options = makeOptions("POST", true, { 
+      id:{id},"linkList":[{link:{link1},exchange:"kraken"},{link:{link2},exchange:"yobit"}] 
+     });
+    return fetch(URL + "/api/admin/", options).then(handleHttpErrors);
+  };
+
   const fetchLoggedIn = (endpoint, updateAction) => {
     const options = makeOptions("GET", true);
     return fetch(URL + "/api/info/" + endpoint, options)
@@ -108,6 +115,7 @@ function apiFacade() {
     hasUserAccess,
     signupData,
     signup,
+    postData
   };
 }
 const facade = apiFacade();

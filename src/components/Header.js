@@ -10,22 +10,22 @@ function Header({ facade, loggedIn, dataFromServer, logout }) {
       </li>
       {facade.hasUserAccess("user", loggedIn) && (
         <li>
-          <NavLink exact activeClassName="selected" to="/ex1">
+          <NavLink exact activeClassName="selected" to="/portfolio">
             Portfolio
           </NavLink>
         </li>
       )}
       {facade.hasUserAccess("user", loggedIn) && (
         <li>
-          <NavLink exact activeClassName="selected" to="/ex2">
+          <NavLink exact activeClassName="selected" to="/favorites">
             Favorites
           </NavLink>
         </li>
       )}
       {facade.hasUserAccess("admin", loggedIn) && (
         <li>
-          <NavLink exact activeClassName="selected" to="/ex3">
-            Only for admin
+          <NavLink exact activeClassName="selected" to="/adminpage">
+            Administrative page
           </NavLink>
         </li>
       )}

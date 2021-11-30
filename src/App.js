@@ -16,6 +16,7 @@ import Signup from "./components/Signup";
 import SignupPage from "./components/SignupPage";
 import CompareCrypto from "./components/CompareCrypto";
 import facade from "./apiFacade";
+import AdminPage from "./components/AdminPage";
 
 export default function App({ facade }) {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -31,6 +32,7 @@ export default function App({ facade }) {
   const signup = (user, pass) => {
     facade.signup(user, pass).then((res) => setSignedUp(true));
   };
+  
   return (
     <Router>
       <div>
@@ -42,14 +44,14 @@ export default function App({ facade }) {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/ex1">
+            <Route path="/portfolio">
               <Exercise1 facade={facade} />
             </Route>
-            <Route path="/ex2">
+            <Route path="/favorites">
               <Exercise2 facade={facade} />
             </Route>
-            <Route path="/ex3">
-              <Exercise3 facade={facade} />
+            <Route path="/adminpage">
+              <AdminPage facade={facade} />
             </Route>
             <Route path="/login">
               <LoginPage
