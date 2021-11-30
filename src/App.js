@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,6 +14,8 @@ import Exercise3 from "./components/Exercise3";
 import LoginPage from "./components/LoginPage";
 import Signup from "./components/Signup";
 import SignupPage from "./components/SignupPage";
+import CompareCrypto from "./components/CompareCrypto";
+import facade from "./apiFacade";
 
 export default function App({ facade }) {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -77,5 +79,5 @@ export default function App({ facade }) {
 // in your app.
 
 function Home() {
-  return null;
+  return <CompareCrypto facade = {facade}/>;
 }
