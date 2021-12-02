@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import "./style2.css";
 import Header from "./components/Header";
-import Exercise1 from "./components/Exercise1";
 import Exercise2 from "./components/Exercise2";
 import Exercise3 from "./components/Exercise3";
 import LoginPage from "./components/LoginPage";
@@ -17,6 +16,7 @@ import SignupPage from "./components/SignupPage";
 import CompareCrypto from "./components/CompareCrypto";
 import facade from "./apiFacade";
 import AdminPage from "./components/AdminPage";
+import Portfolio from "./components/Portfolio";
 
 export default function App({ facade }) {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -45,7 +45,7 @@ export default function App({ facade }) {
               <Home />
             </Route>
             <Route path="/portfolio">
-              <Exercise1 facade={facade} />
+              <Portfolio facade={facade} setLoggedIn={setLoggedIn} login ={login} />
             </Route>
             <Route path="/favorites">
               <Exercise2 facade={facade} />

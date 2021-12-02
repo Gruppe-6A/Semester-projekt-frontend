@@ -1,12 +1,13 @@
 import { useState } from "react";
-
-export default function LogIn({ login, setLoggedIn }) {
+import facade from "../apiFacade";
+export default function LogIn({login, setLoggedIn }) {
   const init = { username: "", password: "" };
   const [loginCredentials, setLoginCredentials] = useState(init);
 
   const performLogin = (evt) => {
     evt.preventDefault();
     login(loginCredentials.username, loginCredentials.password, setLoggedIn);
+    facade.setUsername(loginCredentials.username);
   };
   const onChange = (evt) => {
     setLoginCredentials({
@@ -54,3 +55,5 @@ export default function LogIn({ login, setLoggedIn }) {
     </div>
   );
 }
+
+//export const UsernameContext = React.createContext(loginCredentials.username);

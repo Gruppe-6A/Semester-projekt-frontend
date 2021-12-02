@@ -13,6 +13,14 @@ function apiFacade() {
   const setToken = (token) => {
     localStorage.setItem("jwtToken", token);
   };
+
+  const setUsername = (username) => {
+    localStorage.setItem("username", username);
+  };
+
+   const getUsername = () => {
+    return localStorage.getItem('username');
+  }
   const getToken = () => {
     return localStorage.getItem("jwtToken");
   };
@@ -72,6 +80,12 @@ function apiFacade() {
     return fetch(URL + "/api/admin/", options).then(handleHttpErrors);
   };
 
+  const postUserCrypto = (user, cryptoid, count) => {
+    const options = makeOptions("POST", true, { 
+     userCryptoDTOList: [{userDTO:{userName: user},cryptoValutaDTO:{id:cryptoid},count:count}]});
+    return fetch(URL + "/api/crypto/portfolio", options).then(handleHttpErrors);
+  };
+
   const fetchLoggedIn = (endpoint, updateAction) => {
     const options = makeOptions("GET", true);
     return fetch(URL + "/api/info/" + endpoint, options)
@@ -115,7 +129,10 @@ function apiFacade() {
     hasUserAccess,
     signupData,
     signup,
-    postData
+    postData,
+    postUserCrypto,
+    setUsername,
+    getUsername
   };
 }
 const facade = apiFacade();
