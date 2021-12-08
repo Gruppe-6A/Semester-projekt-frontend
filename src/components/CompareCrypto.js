@@ -1,35 +1,61 @@
-import { useState, useEffect } from "react";
 import facade from "../apiFacade";
+import { useState, useEffect } from "react";
 
-function CompareCrypto({ facade }) {
-    const [Krakencrypto, setKrakenCrypto] = useState({ crypto: "", exchange: "", price: ""});
-    const [Krakencrypto1, setKrakenCrypto1] = useState({ crypto: "", exchange: "", price: ""});
-    const [yobitcrypto, setYobitCrypto] = useState({ crypto: "", exchange: "", price: ""});
-    const [yobitcrypto1, setYobitCrypto1] = useState({ crypto: "", exchange: "", price: ""});
-    
-    const updates = (data) => {
-    setKrakenCrypto({crypto: data[2].name, exchange: data[2].exchange, price: data[2].price});
-    setKrakenCrypto1({crypto: data[3].name, exchange: data[3].exchange, price: data[3].price});
-    setYobitCrypto({crypto: data[0].name, exchange: data[0].exchange, price: data[0].price});
-    setYobitCrypto1({crypto: data[1].name, exchange: data[1].exchange, price: data[1].price});
+function CompareCrypto() {
+  const [compareCrypto, setCompareCrypto] = useState([
+    { crypto: "", exchange: "", price: "" },
+  ]);
+
+  const updates = (data) => {
+    const compareCryptoList = [];
+    data.map((i) => {
+      compareCryptoList.push({
+        crypto: i.name,
+        price: i.price,
+        exchange: i.exchange,
+      });
+    });
+    setCompareCrypto(compareCryptoList);
   };
 
   useEffect(() => {
-    facade.fetchData("crypto/momsasødepigenfrabyen", updates);
+    facade.fetchData("crypto/cryptoList", updates);
   }, [facade]);
-  
+
+  function tableRows() {
+    return compareCrypto.map((i) => {
+      const str = i.exchange;
+      const str2 = str.charAt(0).toUpperCase() + str.slice(1);
+      const cryptoBigSmall = i.crypto;
+      const cryptoBig =
+        cryptoBigSmall.charAt(0).toUpperCase() + cryptoBigSmall.slice(1);
+      return (
+        <tr>
+          <td>{cryptoBig}</td>
+          <td>${i.price}</td>
+          <td>{str2}</td>
+        </tr>
+      );
+    });
+  }
+
   return (
-      <>
-        <h3>
-            Prisen på {Krakencrypto.crypto} er {Krakencrypto.price}, i følge {Krakencrypto.exchange}, <br/>
-            Prisen på {Krakencrypto1.crypto} er {Krakencrypto1.price}, i følge {Krakencrypto1.exchange}, <br/> 
-            Prisen på {yobitcrypto.crypto} er {yobitcrypto.price}, i følge {yobitcrypto.exchange}, <br/>
-            Prisen på {yobitcrypto1.crypto} er {yobitcrypto1.price}, i følge {yobitcrypto1.exchange}, <br/>
-            
-        </h3>
-
-      </>
+    <div className="container">
+      <h2>Welcome to our crypto comparison site :)</h2>
+      <div className="row row-cols-2">
+        <table className="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Crypto</th>
+              <th scope="col">Price</th>
+              <th scope="col">Exchange</th>
+            </tr>
+          </thead>
+          <tbody>{tableRows()}</tbody>
+        </table>
+      </div>
+    </div>
   );
-
 }
+
 export default CompareCrypto;

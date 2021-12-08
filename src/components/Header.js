@@ -17,8 +17,8 @@ function Header({ facade, loggedIn, dataFromServer, logout }) {
       )}
       {facade.hasUserAccess("user", loggedIn) && (
         <li>
-          <NavLink exact activeClassName="selected" to="/favorites">
-            Favorites
+          <NavLink exact activeClassName="selected" to="/search">
+            Search for coin
           </NavLink>
         </li>
       )}

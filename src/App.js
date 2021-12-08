@@ -1,17 +1,9 @@
-import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  NavLink,
-} from "react-router-dom";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./style2.css";
 import Header from "./components/Header";
-import Exercise2 from "./components/Exercise2";
-import Exercise3 from "./components/Exercise3";
+import SearchForCoin from "./components/SearchForCoin";
 import LoginPage from "./components/LoginPage";
-import Signup from "./components/Signup";
 import SignupPage from "./components/SignupPage";
 import CompareCrypto from "./components/CompareCrypto";
 import facade from "./apiFacade";
@@ -32,7 +24,7 @@ export default function App({ facade }) {
   const signup = (user, pass) => {
     facade.signup(user, pass).then((res) => setSignedUp(true));
   };
-  
+
   return (
     <Router>
       <div>
@@ -45,10 +37,14 @@ export default function App({ facade }) {
               <Home />
             </Route>
             <Route path="/portfolio">
-              <Portfolio facade={facade} setLoggedIn={setLoggedIn} login ={login} />
+              <Portfolio
+                facade={facade}
+                setLoggedIn={setLoggedIn}
+                login={login}
+              />
             </Route>
-            <Route path="/favorites">
-              <Exercise2 facade={facade} />
+            <Route path="/search">
+              <SearchForCoin facade={facade} />
             </Route>
             <Route path="/adminpage">
               <AdminPage facade={facade} />
@@ -81,5 +77,5 @@ export default function App({ facade }) {
 // in your app.
 
 function Home() {
-  return <CompareCrypto facade = {facade}/>;
+  return <CompareCrypto facade={facade} />;
 }

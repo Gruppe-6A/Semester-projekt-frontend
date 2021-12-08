@@ -29,3 +29,8 @@ ul.header li a:hover:not(.active) {
 .selected {
   background-color: #4caf50;
 }
+
+.dropdown-menu {
+  height: 140px;
+  overflow-y: scroll;
+}

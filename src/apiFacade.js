@@ -18,9 +18,9 @@ function apiFacade() {
     localStorage.setItem("username", username);
   };
 
-   const getUsername = () => {
-    return localStorage.getItem('username');
-  }
+  const getUsername = () => {
+    return localStorage.getItem("username");
+  };
   const getToken = () => {
     return localStorage.getItem("jwtToken");
   };
@@ -49,8 +49,7 @@ function apiFacade() {
       userName: user,
       userPass: password,
     });
-    return fetch(URL + "/api/info/", options)
-      .then(handleHttpErrors)
+    return fetch(URL + "/api/info/", options).then(handleHttpErrors);
   };
 
   const getUserRoles = () => {
@@ -74,15 +73,26 @@ function apiFacade() {
   };
 
   const postData = (id, link1, link2) => {
-    const options = makeOptions("POST", true, { 
-      id:{id},"linkList":[{link:{link1},exchange:"kraken"},{link:{link2},exchange:"yobit"}] 
-     });
+    const options = makeOptions("POST", true, {
+      id: id.id,
+      linkList: [
+        { link: link1, exchange: "kraken" },
+        { link: link2, exchange: "yobit" },
+      ],
+    });
     return fetch(URL + "/api/admin/", options).then(handleHttpErrors);
   };
 
   const postUserCrypto = (user, cryptoid, count) => {
-    const options = makeOptions("POST", true, { 
-     userCryptoDTOList: [{userDTO:{userName: user},cryptoValutaDTO:{id:cryptoid},count:count}]});
+    const options = makeOptions("POST", true, {
+      userCryptoDTOList: [
+        {
+          userDTO: { userName: user },
+          cryptoValutaDTO: { id: cryptoid },
+          count: count,
+        },
+      ],
+    });
     return fetch(URL + "/api/crypto/portfolio", options).then(handleHttpErrors);
   };
 
@@ -132,7 +142,7 @@ function apiFacade() {
     postData,
     postUserCrypto,
     setUsername,
-    getUsername
+    getUsername,
   };
 }
 const facade = apiFacade();
