@@ -3,6 +3,7 @@ import facade from "../apiFacade";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
+
 function Portfolio() {
   const userName = facade.getUsername();
   const init = { username: userName, cryptoid: "", count: "" };
@@ -86,6 +87,7 @@ function Portfolio() {
             >
               {listOfCryptoNames()}
             </DropdownButton>
+            <p>{value}</p>
             <input
               type="text"
               placeholder="amount..."

@@ -106,8 +106,9 @@ function apiFacade() {
   const fetchData = (endpoint, updateAction) => {
     const options = makeOptions("GET", true); //True add's the token
     return fetch(URL + "/api/" + endpoint, options)
-      .then(handleHttpErrors)
+      .then(handleHttpErrors).catch(error => {console.error(error);})
       .then((data) => updateAction(data));
+
   };
 
   const makeOptions = (method, addToken, body) => {

@@ -6,6 +6,10 @@ function CompareCrypto() {
     { crypto: "", exchange: "", price: "" },
   ]);
 
+  const [topMovers, setTopMovers] = useState([
+    { name: "", change: ""},
+  ]);
+
   const updates = (data) => {
     const compareCryptoList = [];
     data.map((i) => {
@@ -18,8 +22,23 @@ function CompareCrypto() {
     setCompareCrypto(compareCryptoList);
   };
 
+  const updates1 = (data) => {
+    const topMoversList = [];
+    data.map((i) => {
+      topMoversList.push({
+        name: i.name,
+        change: i.change,
+      });
+    });
+    setTopMovers(topMoversList);
+  };
+
   useEffect(() => {
     facade.fetchData("crypto/cryptoList", updates);
+  }, [facade]);
+
+  useEffect(() => {
+    facade.fetchData("crypto/topmovers", updates1);
   }, [facade]);
 
   function tableRows() {
@@ -39,10 +58,33 @@ function CompareCrypto() {
     });
   }
 
+  function tableRows1() {
+    return topMovers.map((i) => {
+      return (
+        <tr>
+          <td>{i.name}</td>
+          <td>{i.change}%</td>
+        </tr>
+      );
+    });
+  }
+
   return (
     <div className="container">
       <h2>Welcome to our crypto comparison site :)</h2>
       <div className="row row-cols-2">
+        
+      <h3>Top Movers</h3>
+      <table className="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Change</th>
+            </tr>
+          </thead>
+          <tbody>{tableRows1()}</tbody>
+        </table>
+        <h3>Crypto prices from different exchanges</h3>
         <table className="table table-hover table-striped">
           <thead>
             <tr>
